@@ -21,9 +21,9 @@ El proyecto se desarrollará utilizando **Flutter** como tecnología principal. 
 A continuación, se presenta la propuesta visual de la interfaz, diseñada con la paleta de colores institucionales.
 
 
-|                    Pantalla Principal                    |           Búsqueda de un Pokémon           |                 Pokémon No Encontrado                 |
-| :------------------------------------------------------: | :----------------------------------------: | :---------------------------------------------------: |
-| ![Pantalla Principal](propuesta/HomePage.png) | ![Mapa Interactivo](propuesta/MapaInteractivo.png) | ![Punto de Interés](propuesta/POI.png) |
+|                  Logo de la aplicación                   |                    Pantalla Principal                    |           Búsqueda de un Pokémon           |                 Pokémon No Encontrado                 |
+| :------------------------------------------------------: | :------------------------------------------------------: | :----------------------------------------: | :---------------------------------------------------: |
+| ![Logo de la aplicación](/propuesta/logo.jpeg) | ![Pantalla Principal](propuesta/HomePage.png) | ![Mapa Interactivo](propuesta/MapaInteractivo.png) | ![Punto de Interés](propuesta/POI.png) |
 
 ### Descripción de Pantallas Principales:
 * **Pantalla de Inicio (Home):** Panel principal de bienvenida con el logotipo de la universidad y accesos rápidos mediante tarjetas (Mapa, Minijuegos, Directorio).
