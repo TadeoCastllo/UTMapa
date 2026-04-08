@@ -17,9 +17,19 @@
     "name": "Canchas Deportivas",
     "description": "Espacio deportivo abierto a toda la comunidad universitaria para la práctica de fútbol, ejercicio al aire libre y torneos internos. Un lugar ideal para liberar energía entre clases.",
     "imageUrls": ["assets/images/canchas_1.jpg", "assets/images/canchas_2.jpg"],
-    "latitude": 17.826262,
-    "longitude": -97.804475,
+    "latitude": 17.8261667,
+    "longitude": -97.80433333333333,
     "schedule": "Acceso 24 Horas",
     "gameRoute": "/futbol"
+  },
+  {
+    "id": "aulas",
+    "name": "Aulas",
+    "description": "Espacio académico para el desarrollo de clases y actividades educativas.",
+    "imageUrls": ["assets/images/aulas_1.jpg", "assets/images/aulas_2.jpg"],
+    "latitude": 17.8259444,
+    "longitude": -97.8025,
+    "schedule": "8:00 AM — 7:00 PM",
+    "gameRoute": "/atrapa_objetos"
   }
 ]
