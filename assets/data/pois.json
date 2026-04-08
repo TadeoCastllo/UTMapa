@@ -5,7 +5,8 @@
     "description": "El corazón intelectual de la UTM. Un espacio dedicado al estudio, la investigación y el acceso a una vasta colección de recursos bibliográficos y digitales en un ambiente tranquilo.",
     "imageUrls": [
       "assets/images/biblioteca_1.jpg",
-      "assets/images/biblioteca_2.jpg"
+      "assets/images/biblioteca_2.jpg",
+      "assets/images/biblioteca_3.jpg"
     ],
     "latitude": 17.828098405603654,
     "longitude": -97.80282653414652,
@@ -16,7 +17,12 @@
     "id": "canchas",
     "name": "Canchas Deportivas",
     "description": "Espacio deportivo abierto a toda la comunidad universitaria para la práctica de fútbol, ejercicio al aire libre y torneos internos. Un lugar ideal para liberar energía entre clases.",
-    "imageUrls": ["assets/images/canchas_1.jpg", "assets/images/canchas_2.jpg"],
+    "imageUrls": [
+      "assets/images/canchas_1.jpg",
+      "assets/images/canchas_2.jpg",
+      "assets/images/canchas_3.jpg",
+      "assets/images/canchas_4.jpg"
+    ],
     "latitude": 17.8261667,
     "longitude": -97.80433333333333,
     "schedule": "Acceso 24 Horas",
@@ -26,7 +32,11 @@
     "id": "aulas",
     "name": "Aulas",
     "description": "Espacio académico para el desarrollo de clases y actividades educativas.",
-    "imageUrls": ["assets/images/aulas_1.jpg", "assets/images/aulas_2.jpg"],
+    "imageUrls": [
+      "assets/images/aulas_1.jpg",
+      "assets/images/aulas_2.jpg",
+      "assets/images/aulas_3.jpg"
+    ],
     "latitude": 17.8259444,
     "longitude": -97.8025,
     "schedule": "8:00 AM — 7:00 PM",
