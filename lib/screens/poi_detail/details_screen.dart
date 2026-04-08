@@ -1,24 +1,14 @@
 import 'package:flutter/material.dart';
-import '../core/constants.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:utmapa/core/constants.dart';
+import 'package:utmapa/models/poi_model.dart';
 
 class DetailsScreen extends StatelessWidget {
-  final String nombre;
-  final String zona;
-  final String descripcion;
-  final String horario;
-  final String redWifi;
-  final Widget juegoDestino;
-  final IconData iconoPrincipal;
+  final POIModel poi;
 
   const DetailsScreen({
     super.key,
-    required this.nombre,
-    required this.zona,
-    required this.descripcion,
-    required this.horario,
-    required this.redWifi,
-    required this.juegoDestino,
-    required this.iconoPrincipal,
+    required this.poi,
   });
 
   @override
@@ -52,7 +42,7 @@ class DetailsScreen extends StatelessWidget {
               ),
               const SizedBox(height: 5),
               Text(
-                nombre,
+                poi.name,
                 style: const TextStyle(
                   fontSize: 34,
                   fontWeight: FontWeight.bold,
@@ -60,45 +50,86 @@ class DetailsScreen extends StatelessWidget {
                 ),
               ),
               Text(
-                "📍 $zona",
+                "📍 Campus UTM",
                 style: TextStyle(color: Colors.grey[700], fontSize: 16),
               ),
               const SizedBox(height: 25),
 
-              // Contenedor de Imagen con Icono Representativo
-              Container(
-                height: 220,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: const Color(
-                    UTMConstants.colorGuinda,
-                  ).withValues(alpha: 0.1),
-                  borderRadius: BorderRadius.circular(25),
-                  border: Border.all(
+              // Contenedor de Galería de Imágenes (con validaciones de null y bordes)
+              if (poi.imageUrls.isNotEmpty)
+                CarouselSlider(
+                  options: CarouselOptions(
+                    height: 220.0,
+                    enlargeCenterPage: true,
+                    enableInfiniteScroll: poi.imageUrls.length > 1,
+                    viewportFraction: 0.9,
+                  ),
+                  items: poi.imageUrls.map((imageUrl) {
+                    return Builder(
+                      builder: (BuildContext context) {
+                        return Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(25),
+                            border: Border.all(
+                              color: const Color(UTMConstants.colorGuinda).withValues(alpha: 0.2),
+                            ),
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(25),
+                            child: Image.asset(
+                              imageUrl,
+                              fit: BoxFit.cover,
+                              width: double.infinity,
+                              errorBuilder: (context, error, stackTrace) {
+                                return Container(
+                                  color: const Color(UTMConstants.colorGuinda).withValues(alpha: 0.1),
+                                  child: const Center(
+                                    child: Icon(
+                                      Icons.image_not_supported,
+                                      size: 50,
+                                      color: Color(UTMConstants.colorGuinda),
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  }).toList(),
+                )
+              else
+                // Fallback si no hay imágenes
+                Container(
+                  height: 220,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
                     color: const Color(
                       UTMConstants.colorGuinda,
-                    ).withValues(alpha: 0.2),
+                    ).withValues(alpha: 0.1),
+                    borderRadius: BorderRadius.circular(25),
+                    border: Border.all(
+                      color: const Color(
+                        UTMConstants.colorGuinda,
+                      ).withValues(alpha: 0.2),
+                    ),
+                  ),
+                  child: const Icon(
+                    Icons.location_on,
+                    size: 100,
+                    color: Color(UTMConstants.colorGuinda),
                   ),
                 ),
-                child: Icon(
-                  iconoPrincipal,
-                  size: 100,
-                  color: const Color(UTMConstants.colorGuinda),
-                ),
-              ),
 
               const SizedBox(height: 25),
 
               // Fichas de Información
               Row(
                 children: [
-                  _infoCard(Icons.access_time_filled, "HORARIO", horario),
+                  _infoCard(Icons.access_time_filled, "HORARIO", poi.schedule),
                   const SizedBox(width: 15),
-                  _infoCard(
-                    redWifi == "No disponible" ? Icons.wifi_off : Icons.wifi,
-                    "CONECTIVIDAD",
-                    redWifi,
-                  ),
+                  _infoCard(Icons.map, "UBICACIÓN", "UTM"),
                 ],
               ),
 
@@ -113,7 +144,7 @@ class DetailsScreen extends StatelessWidget {
               ),
               const SizedBox(height: 12),
               Text(
-                descripcion,
+                poi.description,
                 style: const TextStyle(
                   fontSize: 16,
                   color: Colors.black87,
@@ -179,10 +210,12 @@ class DetailsScreen extends StatelessWidget {
                         ),
                         elevation: 0,
                       ),
-                      onPressed: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (_) => juegoDestino),
-                      ),
+                      onPressed: () {
+                        // Navega a la ruta registrada en POIModel
+                        if (poi.gameRoute.isNotEmpty) {
+                          Navigator.pushNamed(context, poi.gameRoute);
+                        }
+                      },
                       child: const Text(
                         "INICIAR JUEGO",
                         style: TextStyle(

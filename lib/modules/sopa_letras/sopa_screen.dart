@@ -47,7 +47,7 @@ class _SopaLetrasScreenState extends State<SopaLetrasScreen> {
     timer?.cancel();
     timer = Timer.periodic(const Duration(seconds: 1), (t) {
       if (timeLeft > 0) {
-        setState(() => timeLeft--);
+        if (mounted) setState(() => timeLeft--);
       } else {
         _endGame(false);
       }
@@ -167,7 +167,8 @@ class _SopaLetrasScreenState extends State<SopaLetrasScreen> {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             height: MediaQuery.of(context).size.width,
-            child: _buildGrid(),
+            // --- CAMBIO AQUÍ: Centramos el grid ---
+            child: Center(child: _buildGrid()),
           ),
           const SizedBox(height: 15),
           const Text(
@@ -205,8 +206,9 @@ class _SopaLetrasScreenState extends State<SopaLetrasScreen> {
           onPanUpdate: (d) {
             int r = (d.localPosition.dy / cellSize).floor();
             int c = (d.localPosition.dx / cellSize).floor();
-            if (r >= 0 && r < 10 && c >= 0 && c < 10)
+            if (r >= 0 && r < 10 && c >= 0 && c < 10) {
               _updateLineSelection(r, c);
+            }
           },
           onPanEnd: (_) {
             _validateWord();
