@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'map_screen.dart';
-import '../core/constants.dart';
+import 'package:utmapa/core/constants.dart';
+import 'package:utmapa/screens/map/map_screen.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});

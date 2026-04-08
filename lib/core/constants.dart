@@ -5,8 +5,7 @@ class UTMConstants {
   static const int colorBeige = 0xFFF5F5DC;
 
   static final LatLng bibliotecaPos = LatLng(
-    17.828098405603654,
-    -97.80282653414652,
+    17.828098405603654,-97.80282653414652,
   );
   static final LatLng canchasPos = LatLng(17.826262, -97.804475);
   static const double activationRadius = 99999.0;
