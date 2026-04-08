@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:sensors_plus/sensors_plus.dart'; // Importación necesaria
 import '../../core/constants.dart';
 
 class FutbolScreen extends StatefulWidget {
@@ -14,12 +15,30 @@ class _FutbolScreenState extends State<FutbolScreen> {
   int puntosUTM = 0, puntosIA = 0, tiempoRestante = 60;
   bool disparando = false, juegoTerminado = false;
   double velPortero = 0.05;
+
+  // Timers y Subscripciones
   Timer? gameTimer, porteroTimer;
+  StreamSubscription<AccelerometerEvent>? _accelerometerSubscription;
 
   @override
   void initState() {
     super.initState();
     _iniciarPartido();
+    _iniciarSensores(); // Activamos los sensores al iniciar
+  }
+
+  void _iniciarSensores() {
+    _accelerometerSubscription = accelerometerEventStream().listen((
+      AccelerometerEvent event,
+    ) {
+      if (!mounted || disparando || juegoTerminado) return;
+
+      setState(() {
+        // Ajuste de rango estricto: -0.6 a 0.6 para no rebasar los postes
+        // Reduje un poco la sensibilidad (* -0.12) para que sea más fácil de controlar
+        balonX = (event.x * -0.12).clamp(-0.6, 0.6);
+      });
+    });
   }
 
   void _iniciarPartido() {
@@ -57,13 +76,23 @@ class _FutbolScreenState extends State<FutbolScreen> {
 
     Timer.periodic(const Duration(milliseconds: 25), (t) {
       setState(() {
-        balonY -= 0.08;
-        if (balonY <= -0.75) {
+        balonY -= 0.08; // El balón avanza hacia la portería
+
+        // 1. ZONA DE IMPACTO (Línea del portero)
+        if (balonY <= -0.62) {
           double diferencia = (balonX - porteroX).abs();
+
           if (diferencia <= 0.28) {
+            // --- ES ATAJADA ---
+            balonY = -0.62; // SE DETIENE EN SECO en el portero
             t.cancel();
             _procesarResultado(false);
-          } else if (balonY <= -0.95) {
+          }
+          // 2. LÍMITE DE LA RED (GOL)
+          // Reducimos el límite de -0.95 a -0.78 para que no se pase
+          else if (balonY <= -0.62) {
+            // --- ES GOL ---
+            balonY = -0.62; // SE DETIENE EN SECO dentro de la red
             t.cancel();
             _procesarResultado(true);
           }
@@ -85,6 +114,7 @@ class _FutbolScreenState extends State<FutbolScreen> {
         setState(() {
           balonY = 0.7;
           disparando = false;
+          // Al reiniciar la posición Y, los sensores vuelven a tomar control de balonX
         });
       }
     });
@@ -136,6 +166,8 @@ class _FutbolScreenState extends State<FutbolScreen> {
       ),
     );
   }
+
+  // --- El resto de los Widgets (_buildMarcadorElegante, _buildInfoEquipo, etc.) se mantienen igual ---
 
   Widget _buildMarcadorElegante() {
     return Container(
@@ -366,6 +398,8 @@ class _FutbolScreenState extends State<FutbolScreen> {
   void dispose() {
     porteroTimer?.cancel();
     gameTimer?.cancel();
+    _accelerometerSubscription
+        ?.cancel(); // IMPORTANTE: Cancelar la subscripción
     super.dispose();
   }
 }
