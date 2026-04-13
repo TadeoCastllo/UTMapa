@@ -41,5 +41,75 @@
     "longitude": -97.8025,
     "schedule": "8:00 AM — 7:00 PM",
     "gameRoute": "/atrapa_objetos"
+  },
+  {
+    "id": "servicios_escolares",
+    "name": "Servicios Escolares",
+    "description": "Espacio académico para el desarrollo de actividades relacionadas con la gestión escolar",
+    "imageUrls": [
+      "assets/images/servicios_escolares_1.jpg",
+      "assets/images/servicios_escolares_2.jpg",
+      "assets/images/servicios_escolares_3.jpg"
+    ],
+    "latitude": 17.827133581565285,
+    "longitude": -97.80445085156545,
+    "schedule": "8:00 AM — 7:00 PM",
+    "gameRoute": "/trivia_utm"
+  },
+  {
+    "id": "auditorio",
+    "name": "Auditorio",
+    "description": "Espacio donde diversas actividades académicas y culturales se llevan a cabo.",
+    "imageUrls": [
+      "assets/images/auditorio_1.jpg",
+      "assets/images/auditorio_2.jpg",
+      "assets/images/auditorio_3.jpg"
+    ],
+    "latitude": 17.827350622254993,
+    "longitude": -97.80496047127883,
+    "schedule": "8:00 AM — 7:00 PM",
+    "gameRoute": "/trivia_utm"
+  },
+  {
+    "id": "paraninfo",
+    "name": "Paraninfo",
+    "description": "Espacio donde diversas actividades académicas y culturales se llevan a cabo.",
+    "imageUrls": [
+      "assets/images/paraninfo_1.jpg",
+      "assets/images/paraninfo_2.jpg",
+      "assets/images/paraninfo_3.jpg"
+    ],
+    "latitude": 17.82711321847246,
+    "longitude": -97.80367498014547,
+    "schedule": "8:00 AM — 7:00 PM",
+    "gameRoute": "/trivia_utm"
+  },
+  {
+    "id": "Gimnasio",
+    "name": "Gimnasio",
+    "description": "Espacio para fomentar la salud de los alumnos",
+    "imageUrls": [
+      "assets/images/gimnasio_1.jpg",
+      "assets/images/gimnasio_2.jpg",
+      "assets/images/gimnasio_3.jpg"
+    ],
+    "latitude": 17.835641045414135,
+    "longitude": -97.80215825124438,
+    "schedule": "6:00 AM — 8:00 AM & 6:00 PM — 10:00 PM",
+    "gameRoute": "/trivia_utm"
+  },
+  {
+    "id": "Usalab",
+    "name": "Usalab",
+    "description": "Espacio para fomentar la salud de los alumnos",
+    "imageUrls": [
+      "assets/images/usalab_1.jpg",
+      "assets/images/usalab_2.jpg",
+      "assets/images/usalab_3.jpg"
+    ],
+    "latitude": 17.827971277894644,
+    "longitude": -97.80474478237339,
+    "schedule": "9:00 AM - 2:00 PM & 4:00 PM - 7 PM",
+    "gameRoute": "/trivia_utm"
   }
 ]
