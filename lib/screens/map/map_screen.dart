@@ -15,10 +15,11 @@ class MapScreen extends StatefulWidget {
   State<MapScreen> createState() => _MapScreenState();
 }
 
-class _MapScreenState extends State<MapScreen> {
+class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
   LatLng? _currentPosition;
   bool _isLoading = true;
   List<POIModel> _pois = [];
+  final MapController _mapController = MapController();
 
   @override
   void initState() {
@@ -78,6 +79,39 @@ class _MapScreenState extends State<MapScreen> {
     }
   }
 
+  void _animatedMapMove(LatLng destLocation, double destZoom) {
+    if (!mounted) return;
+
+    final latTween = Tween<double>(
+        begin: _mapController.camera.center.latitude,
+        end: destLocation.latitude);
+    final lngTween = Tween<double>(
+        begin: _mapController.camera.center.longitude,
+        end: destLocation.longitude);
+    final zoomTween = Tween<double>(
+        begin: _mapController.camera.zoom, end: destZoom);
+
+    var controller = AnimationController(
+        duration: const Duration(milliseconds: 1200), vsync: this);
+
+    Animation<double> animation =
+        CurvedAnimation(parent: controller, curve: Curves.fastOutSlowIn);
+
+    controller.addListener(() {
+      _mapController.move(
+          LatLng(latTween.evaluate(animation), lngTween.evaluate(animation)),
+          zoomTween.evaluate(animation));
+    });
+
+    animation.addStatusListener((status) {
+      if (status == AnimationStatus.completed || status == AnimationStatus.dismissed) {
+        controller.dispose();
+      }
+    });
+
+    controller.forward();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -93,6 +127,7 @@ class _MapScreenState extends State<MapScreen> {
               ),
             )
           : FlutterMap(
+              mapController: _mapController,
               options: MapOptions(
                 initialCenter: UTMConstants.bibliotecaPos,
                 initialZoom: 16.5,
@@ -143,6 +178,16 @@ class _MapScreenState extends State<MapScreen> {
                 ),
               ],
             ),
+      floatingActionButton: _currentPosition != null
+          ? FloatingActionButton(
+              backgroundColor: const Color(UTMConstants.colorGuinda),
+              foregroundColor: Colors.white,
+              onPressed: () {
+                _animatedMapMove(_currentPosition!, 16.5);
+              },
+              child: const Icon(Icons.my_location),
+            )
+          : null,
     );
   }
 }

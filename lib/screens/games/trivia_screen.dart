@@ -2,8 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import '../../models/pregunta_model.dart';
-// Asume que tienes tus constantes importadas, ajusta la ruta
-// import '../../core/constants.dart';
+import 'package:utmapa/core/score_manager.dart';
 
 class TriviaScreen extends StatefulWidget {
   const TriviaScreen({super.key});
@@ -142,6 +141,8 @@ class _TriviaScreenState extends State<TriviaScreen> {
   }
 
   void _mostrarResultadosFinales() {
+    ScoreManager.checkAndSaveScore('highscore_trivia', puntuacion, context: context);
+
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -170,7 +171,25 @@ class _TriviaScreenState extends State<TriviaScreen> {
               },
               child: const Text(
                 "Volver al Mapa",
-                style: TextStyle(color: Color(0xFF800000)),
+                style: TextStyle(color: Colors.grey),
+              ),
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFF800000),
+              ),
+              onPressed: () {
+                Navigator.pop(context); // Cierra el diálogo
+                setState(() {
+                  cargando = true;
+                  preguntaActualIndex = 0;
+                  puntuacion = 0;
+                });
+                _cargarPreguntas(); // Recarga las preguntas (las vuelve a barajar)
+              },
+              child: const Text(
+                "Reintentar",
+                style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
               ),
             ),
           ],

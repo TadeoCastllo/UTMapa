@@ -39,6 +39,8 @@ dependencies:
   flutter_map: ^8.2.2
   geolocator: ^14.0.2
   latlong2: ^0.9.1
+  shared_preferences: ^2.5.5
+  flutter_confetti: ^0.5.1
 
 dev_dependencies:
   flutter_test:
@@ -50,6 +52,15 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^6.0.0
+  flutter_launcher_icons: ^0.14.4
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/logo_utm_512.png"
+  adaptive_icon_background: "#800000" # Fondo Guinda UTM
+  adaptive_icon_foreground: "assets/images/logo_utm_512.png"
+  min_sdk_android: 21
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -76,19 +87,21 @@ flutter:
     - assets/images/servicios_escolares_1.jpg
     - assets/images/servicios_escolares_2.jpg
     - assets/images/servicios_escolares_3.jpg
-    # - assets/images/paraninfo_1.jpg
-    # - assets/images/paraninfo_2.jpg
-    # - assets/images/paraninfo_3.jpg
-    # - assets/images/auditorio_1.jpg
-    # - assets/images/auditorio_2.jpg
-    # - assets/images/auditorio_3.jpg
-    # - assets/images/usalab_1.jpg
-    # - assets/images/usalab_2.jpg
-    # - assets/images/fuente_1.jpg
-    # - assets/images/fuente_2.jpg
-    # - assets/images/gimnasio_1.jpg
-    # - assets/images/gimnasio_2.jpg
-    # - assets/images/gimnasio_3.jpg
+    - assets/images/paraninfo_1.jpg
+    - assets/images/paraninfo_2.jpg
+    - assets/images/auditorio_1.jpg
+    - assets/images/auditorio_2.jpg
+    - assets/images/auditorio_3.jpg
+    - assets/images/usalab_1.jpg
+    - assets/images/usalab_2.jpg
+    - assets/images/fuente_1.jpg
+    - assets/images/fuente_2.jpg
+    - assets/images/gimnasio_1.jpg
+    - assets/images/gimnasio_2.jpg
+    - assets/images/purificadora_1.jpg
+    - assets/images/purificadora_2.jpg
+    - assets/images/purificadora_3.jpg
+
     - assets/data/pois.json
     - assets/data/trivia.json
 
