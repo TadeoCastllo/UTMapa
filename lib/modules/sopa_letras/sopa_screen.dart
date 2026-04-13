@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import '../../core/constants.dart';
 import 'sopa_logic.dart';
+import 'package:utmapa/core/score_manager.dart';
 
 class SopaLetrasScreen extends StatefulWidget {
   const SopaLetrasScreen({super.key});
@@ -128,15 +129,29 @@ class _SopaLetrasScreenState extends State<SopaLetrasScreen> {
 
   void _endGame(bool win) {
     timer?.cancel();
+    int segundosTranscurridos = 120 - timeLeft;
+
+    if (win) {
+      ScoreManager.checkAndSaveTime(segundosTranscurridos, context: context);
+    }
     showDialog(
       context: context,
       barrierDismissible: false,
       builder: (context) => AlertDialog(
         title: Text(win ? "¡Victoria!" : "Tiempo agotado"),
+        content: Text(
+          win
+              ? "¡Tardaste ${ScoreManager.formatTime(segundosTranscurridos)} en encontrar todas las palabras!"
+              : "Se agotó el tiempo.",
+          style: const TextStyle(fontSize: 16),
+        ),
         actions: [
           TextButton(
-            onPressed: () => Navigator.popUntil(context, (r) => r.isFirst),
-            child: const Text("SALIR"),
+            onPressed: () {
+              Navigator.pop(context); // Cierra la alerta
+              Navigator.pop(context); // Vuelve a la pantalla anterior
+            },
+            child: const Text("SALIR", style: TextStyle(color: Colors.grey)),
           ),
           TextButton(
             onPressed: () {

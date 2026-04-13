@@ -76,8 +76,7 @@
     "description": "Espacio donde diversas actividades académicas y culturales se llevan a cabo.",
     "imageUrls": [
       "assets/images/paraninfo_1.jpg",
-      "assets/images/paraninfo_2.jpg",
-      "assets/images/paraninfo_3.jpg"
+      "assets/images/paraninfo_2.jpg"
     ],
     "latitude": 17.82711321847246,
     "longitude": -97.80367498014547,
@@ -90,8 +89,7 @@
     "description": "Espacio para fomentar la salud de los alumnos",
     "imageUrls": [
       "assets/images/gimnasio_1.jpg",
-      "assets/images/gimnasio_2.jpg",
-      "assets/images/gimnasio_3.jpg"
+      "assets/images/gimnasio_2.jpg"
     ],
     "latitude": 17.835641045414135,
     "longitude": -97.80215825124438,
@@ -104,12 +102,38 @@
     "description": "Espacio para fomentar la salud de los alumnos",
     "imageUrls": [
       "assets/images/usalab_1.jpg",
-      "assets/images/usalab_2.jpg",
-      "assets/images/usalab_3.jpg"
+      "assets/images/usalab_2.jpg"
     ],
     "latitude": 17.827971277894644,
     "longitude": -97.80474478237339,
     "schedule": "9:00 AM - 2:00 PM & 4:00 PM - 7 PM",
+    "gameRoute": "/trivia_utm"
+  },
+  {
+    "id": "purificadora",
+    "name": "Purificadora",
+    "description": "Espacio para obtener agua purificada sin costo alguno",
+    "imageUrls": [
+      "assets/images/purificadora_1.jpg",
+      "assets/images/purificadora_2.jpg",
+      "assets/images/purificadora_3.jpg"
+    ],
+    "latitude": 17.826356202310265,
+    "longitude": -97.80277911330376,
+    "schedule": "8:00 AM - 1:30 PM & 3:30 PM - 6 PM",
+    "gameRoute": "/trivia_utm"
+  },
+  {
+    "id":"fuente",
+    "name":"Fuente",
+    "description":"Fuente de agua",
+    "imageUrls":[
+      "assets/images/fuente_1.jpg",
+      "assets/images/fuente_2.jpg"
+    ],
+    "latitude": 17.826836246982392,
+    "longitude": -97.8034174790403,
+    "schedule": "Acceso 24 Horas",
     "gameRoute": "/trivia_utm"
   }
 ]

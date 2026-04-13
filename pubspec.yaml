@@ -39,6 +39,8 @@ dependencies:
   flutter_map: ^8.2.2
   geolocator: ^14.0.2
   latlong2: ^0.9.1
+  shared_preferences: ^2.5.5
+  flutter_confetti: ^0.5.1
 
 dev_dependencies:
   flutter_test:
@@ -76,19 +78,21 @@ flutter:
     - assets/images/servicios_escolares_1.jpg
     - assets/images/servicios_escolares_2.jpg
     - assets/images/servicios_escolares_3.jpg
-    # - assets/images/paraninfo_1.jpg
-    # - assets/images/paraninfo_2.jpg
-    # - assets/images/paraninfo_3.jpg
-    # - assets/images/auditorio_1.jpg
-    # - assets/images/auditorio_2.jpg
-    # - assets/images/auditorio_3.jpg
-    # - assets/images/usalab_1.jpg
-    # - assets/images/usalab_2.jpg
-    # - assets/images/fuente_1.jpg
-    # - assets/images/fuente_2.jpg
-    # - assets/images/gimnasio_1.jpg
-    # - assets/images/gimnasio_2.jpg
-    # - assets/images/gimnasio_3.jpg
+    - assets/images/paraninfo_1.jpg
+    - assets/images/paraninfo_2.jpg
+    - assets/images/auditorio_1.jpg
+    - assets/images/auditorio_2.jpg
+    - assets/images/auditorio_3.jpg
+    - assets/images/usalab_1.jpg
+    - assets/images/usalab_2.jpg
+    - assets/images/fuente_1.jpg
+    - assets/images/fuente_2.jpg
+    - assets/images/gimnasio_1.jpg
+    - assets/images/gimnasio_2.jpg
+    - assets/images/purificadora_1.jpg
+    - assets/images/purificadora_2.jpg
+    - assets/images/purificadora_3.jpg
+    
     - assets/data/pois.json
     - assets/data/trivia.json
 

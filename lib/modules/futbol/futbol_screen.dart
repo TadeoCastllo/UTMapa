@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:sensors_plus/sensors_plus.dart'; // Importación necesaria
+import 'package:utmapa/core/score_manager.dart';
 import '../../core/constants.dart';
 
 class FutbolScreen extends StatefulWidget {
@@ -63,6 +64,11 @@ class _FutbolScreenState extends State<FutbolScreen> {
         setState(() {
           juegoTerminado = true;
         });
+        ScoreManager.checkAndSaveScore(
+          'highscore_futbol',
+          puntosUTM,
+          context: context,
+        );
         t.cancel();
       }
     });
@@ -166,8 +172,6 @@ class _FutbolScreenState extends State<FutbolScreen> {
       ),
     );
   }
-
-  // --- El resto de los Widgets (_buildMarcadorElegante, _buildInfoEquipo, etc.) se mantienen igual ---
 
   Widget _buildMarcadorElegante() {
     return Container(
@@ -321,8 +325,7 @@ class _FutbolScreenState extends State<FutbolScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   ElevatedButton(
-                    onPressed: () =>
-                        Navigator.popUntil(context, (r) => r.isFirst),
+                    onPressed: () => Navigator.pop(context),
                     child: const Text("SALIR"),
                   ),
                   ElevatedButton(

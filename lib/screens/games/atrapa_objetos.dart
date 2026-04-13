@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:utmapa/models/objeto_cayendo.dart';
+import 'package:utmapa/core/score_manager.dart';
 
 class AtrapaObjetosScreen extends StatefulWidget {
   const AtrapaObjetosScreen({super.key});
@@ -15,6 +16,8 @@ class _AtrapaObjetosScreenState extends State<AtrapaObjetosScreen> {
   int puntuacion = 0;
   int vidas = 3; // Iniciamos con 3 vidas
   bool enJuego = false, juegoTerminado = false;
+  int recordPersonal = 0;
+  bool rompioRecord = false;
 
   List<ObjetoCayendo> objetos = [];
   final Random _random = Random();
@@ -37,6 +40,19 @@ class _AtrapaObjetosScreenState extends State<AtrapaObjetosScreen> {
     Icons.warning_amber, // Alerta
     Icons.cancel, // Tache/Reprobado
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    _cargarRecord();
+  }
+
+  Future<void> _cargarRecord() async {
+    int recordGuardado = await ScoreManager.getScore('highscore_mochila');
+    setState(() {
+      recordPersonal = recordGuardado;
+    });
+  }
 
   @override
   void dispose() {
@@ -121,13 +137,22 @@ class _AtrapaObjetosScreenState extends State<AtrapaObjetosScreen> {
     });
   }
 
-  void _terminarJuego() {
+  Future<void> _terminarJuego() async {
+    physicsTimer?.cancel();
+    spawnTimer?.cancel();
+
+    // Verificamos y guardamos el récord
+    bool nuevoRecord = await ScoreManager.checkAndSaveScore('highscore_mochila', puntuacion, context: context);
+    if (nuevoRecord) {
+      // Actualizamos la variable local para que la pantalla final lo sepa
+      recordPersonal = puntuacion;
+    }
+
     setState(() {
       enJuego = false;
       juegoTerminado = true;
+      rompioRecord = nuevoRecord;
     });
-    physicsTimer?.cancel();
-    spawnTimer?.cancel();
   }
 
   @override
@@ -277,6 +302,24 @@ class _AtrapaObjetosScreenState extends State<AtrapaObjetosScreen> {
                 ),
               ),
               const SizedBox(height: 30),
+              if (rompioRecord)
+                const Text(
+                  "¡NUEVO RÉCORD PERSONAL!",
+                  style: TextStyle(
+                    color: Colors.orange,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
+                )
+              else
+                Text(
+                  "Mejor Récord: $recordPersonal",
+                  style: const TextStyle(
+                    color: Colors.grey,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 16,
+                  ),
+                ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
