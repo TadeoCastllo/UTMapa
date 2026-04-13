@@ -1,0 +1,341 @@
+{
+  "titulo": "Trivia UTM - Nuevo Ingreso",
+  "descripcion": "Pon a prueba tus conocimientos sobre la Universidad Tecnológica de la Mixteca y el tronco común de ingeniería.",
+  "preguntas": [
+    {
+      "id": 1,
+      "categoria": "Historia UTM",
+      "pregunta": "¿En qué año fue fundada la Universidad Tecnológica de la Mixteca?",
+      "opciones": ["1990", "1994", "1988", "2000"],
+      "respuestaCorrectaIndex": 0,
+      "retroalimentacion": "La UTM inició actividades en 1990, siendo el pilar de lo que hoy es el SUNEO."
+    },
+    {
+      "id": 2,
+      "categoria": "Servicios Escolares",
+      "pregunta": "¿Qué departamento es responsable de emitir tu credencial de estudiante y kárdex?",
+      "opciones": [
+        "Control Escolar",
+        "Jefatura de Carrera",
+        "Servicios Escolares",
+        "Rectoría"
+      ],
+      "respuestaCorrectaIndex": 2,
+      "retroalimentacion": "Servicios Escolares maneja toda tu documentación oficial y procesos de reinscripción."
+    },
+    {
+      "id": 3,
+      "categoria": "Cultura Institucional",
+      "pregunta": "¿En qué ciudad del estado de Oaxaca se encuentra el campus principal de la UTM?",
+      "opciones": [
+        "Oaxaca de Juárez",
+        "Huajuapan de León",
+        "Puerto Escondido",
+        "Miahuatlán"
+      ],
+      "respuestaCorrectaIndex": 1,
+      "retroalimentacion": "La UTM está orgullosamente ubicada en la Heroica Ciudad de Huajuapan de León."
+    },
+    {
+      "id": 4,
+      "categoria": "Vida Universitaria",
+      "pregunta": "¿Qué significa SUNEO?",
+      "opciones": [
+        "Sistema Universitario de Nueva Educación en Oaxaca",
+        "Sistema de Universidades Estatales de Oaxaca",
+        "Sindicato Universitario Nacional de Educadores",
+        "Sociedad de Universidades del Norte y Este de Oaxaca"
+      ],
+      "respuestaCorrectaIndex": 1,
+      "retroalimentacion": "La UTM es la universidad fundadora del Sistema de Universidades Estatales de Oaxaca (SUNEO)."
+    },
+    {
+      "id": 5,
+      "categoria": "Cultura Institucional",
+      "pregunta": "¿Cuál es el evento cultural más importante que organiza la UTM anualmente?",
+      "opciones": [
+        "Feria de las Matemáticas",
+        "Semana de la Cultura Mixteca",
+        "Congreso de Robótica",
+        "Festival del Sol"
+      ],
+      "respuestaCorrectaIndex": 1,
+      "retroalimentacion": "La Semana de la Cultura Mixteca reúne exposiciones, conferencias y eventos artísticos de toda la región."
+    },
+    {
+      "id": 6,
+      "categoria": "Cultura Institucional",
+      "pregunta": "¿Cuál es el lema de la Universidad Tecnológica de la Mixteca?",
+      "opciones": [
+        "Kha'nda ya'a xi ni",
+        "Por mi raza hablará el espíritu",
+        "Educación para la libertad",
+        "Innovación y Tecnología"
+      ],
+      "respuestaCorrectaIndex": 0,
+      "retroalimentacion": "El lema está en mixteco y significa 'Caminamos hacia el sol' o 'Hacia la luz'."
+    },
+    {
+      "id": 7,
+      "categoria": "Trámites Universitarios",
+      "pregunta": "¿A dónde debes acudir para realizar el pago físico de constancias o reposición de credencial?",
+      "opciones": [
+        "Biblioteca Central",
+        "Departamento de Recursos Financieros (Caja)",
+        "Centro de Cómputo",
+        "Caseta de Vigilancia"
+      ],
+      "respuestaCorrectaIndex": 1,
+      "retroalimentacion": "Todos los pagos físicos oficiales de la universidad se realizan en la Caja."
+    },
+    {
+      "id": 8,
+      "categoria": "Tronco Común (Ingeniería)",
+      "pregunta": "En el contexto de la programación estructurada (C), ¿qué es una función?",
+      "opciones": [
+        "Un error de compilación crítico.",
+        "Un bloque de código reutilizable que realiza una tarea específica.",
+        "Un tipo de variable para almacenar texto largo.",
+        "El ciclo infinito principal de un programa."
+      ],
+      "respuestaCorrectaIndex": 1,
+      "retroalimentacion": "Las funciones permiten modularizar el código, haciéndolo más limpio y fácil de depurar."
+    },
+    {
+      "id": 9,
+      "categoria": "Tronco Común (Física)",
+      "pregunta": "¿Cuál es la unidad del Sistema Internacional para medir la fuerza?",
+      "opciones": ["Joule", "Watt", "Pascal", "Newton"],
+      "respuestaCorrectaIndex": 3,
+      "retroalimentacion": "El Newton (N) es la unidad de fuerza, equivalente a kg·m/s²."
+    },
+    {
+      "id": 10,
+      "categoria": "Matemáticas Básicas",
+      "pregunta": "¿Cuál es el resultado de elevar cualquier número entero positivo a la potencia 0?",
+      "opciones": ["0", "El mismo número", "1", "-1"],
+      "respuestaCorrectaIndex": 2,
+      "retroalimentacion": "Por convención matemática, cualquier número real distinto de cero elevado a la potencia cero es igual a 1."
+    },
+    {
+      "id": 11,
+      "categoria": "Computación",
+      "pregunta": "¿Cómo se le llama al sistema numérico de base 2, fundamental en el procesamiento de computadoras?",
+      "opciones": ["Hexadecimal", "Octal", "Decimal", "Binario"],
+      "respuestaCorrectaIndex": 3,
+      "retroalimentacion": "El sistema binario utiliza únicamente los dígitos 0 y 1 para representar cualquier tipo de dato."
+    },
+    {
+      "id": 12,
+      "categoria": "Cálculo Diferencial",
+      "pregunta": "¿Cuál es la derivada de una constante pura (por ejemplo, f(x) = 5)?",
+      "opciones": ["x", "1", "0", "Infinito"],
+      "respuestaCorrectaIndex": 2,
+      "retroalimentacion": "La derivada representa la tasa de cambio; como una constante nunca cambia, su tasa de cambio es 0."
+    },
+    {
+      "id": 13,
+      "categoria": "Lógica Matemática",
+      "pregunta": "En álgebra booleana, ¿cuál es el resultado de la operación (1 AND 0)?",
+      "opciones": ["1", "0", "-1", "Null"],
+      "respuestaCorrectaIndex": 1,
+      "retroalimentacion": "La compuerta AND requiere que ambas entradas sean verdaderas (1) para que la salida sea verdadera."
+    },
+    {
+      "id": 14,
+      "categoria": "Computación",
+      "pregunta": "¿Qué significan las siglas CPU?",
+      "opciones": [
+        "Computer Personal Unit",
+        "Central Process Utility",
+        "Central Processing Unit",
+        "Core Program Unit"
+      ],
+      "respuestaCorrectaIndex": 2,
+      "retroalimentacion": "La Unidad Central de Procesamiento es el 'cerebro' encargado de ejecutar las instrucciones de los programas."
+    },
+    {
+      "id": 15,
+      "categoria": "Cálculo Integral",
+      "pregunta": "Geométricamente, ¿qué representa la integral definida de una función continua y positiva?",
+      "opciones": [
+        "La pendiente de la recta tangente.",
+        "El área bajo la curva en un intervalo dado.",
+        "El punto de inflexión.",
+        "El límite cuando x tiende a cero."
+      ],
+      "respuestaCorrectaIndex": 1,
+      "retroalimentacion": "La integral definida se utiliza fundamentalmente para calcular áreas, volúmenes y otras acumulaciones."
+    },
+    {
+      "id": 16,
+      "categoria": "Desarrollo de Software",
+      "pregunta": "¿Qué framework, creado por Google, utiliza el lenguaje Dart para desarrollar aplicaciones móviles multiplataforma?",
+      "opciones": ["React Native", "Ionic", "Xamarin", "Flutter"],
+      "respuestaCorrectaIndex": 3,
+      "retroalimentacion": "Flutter es precisamente la tecnología con la que está construida esta aplicación de orientación."
+    },
+    {
+      "id": 17,
+      "categoria": "Desarrollo Web",
+      "pregunta": "¿Qué es HTML?",
+      "opciones": [
+        "Un lenguaje de programación compilado.",
+        "Un lenguaje de marcado de hipertexto.",
+        "Un sistema gestor de bases de datos.",
+        "Un protocolo de transferencia de archivos."
+      ],
+      "respuestaCorrectaIndex": 1,
+      "retroalimentacion": "HTML da la estructura y el significado al contenido de las páginas web."
+    },
+    {
+      "id": 18,
+      "categoria": "Herramientas de Desarrollo",
+      "pregunta": "En el control de versiones con Git, ¿qué comando se utiliza para enviar tus cambios al repositorio remoto?",
+      "opciones": ["git pull", "git commit", "git push", "git fetch"],
+      "respuestaCorrectaIndex": 2,
+      "retroalimentacion": "'git push' sube tu código local a plataformas como GitHub o GitLab para trabajar en equipo."
+    },
+    {
+      "id": 19,
+      "categoria": "Desarrollo Moderno",
+      "pregunta": "¿Qué herramienta web actúa como un ORM (Object-Relational Mapper) facilitando la conexión entre código TypeScript/JavaScript y bases de datos SQL?",
+      "opciones": ["Tailwind", "Prisma", "Axios", "Webpack"],
+      "respuestaCorrectaIndex": 1,
+      "retroalimentacion": "Prisma es excelente para interactuar con bases de datos como MySQL o MariaDB de forma segura e intuitiva."
+    },
+    {
+      "id": 20,
+      "categoria": "Sistemas Operativos",
+      "pregunta": "En entornos Linux (como Arch o Garuda), ¿qué es 'Fish'?",
+      "opciones": [
+        "El nombre en clave del kernel de Linux.",
+        "Un editor de texto en terminal.",
+        "Un intérprete de comandos (shell) interactivo.",
+        "Un gestor de ventanas."
+      ],
+      "respuestaCorrectaIndex": 2,
+      "retroalimentacion": "Fish (Friendly Interactive Shell) es una excelente alternativa a Bash por su autocompletado inteligente."
+    },
+    {
+      "id": 21,
+      "categoria": "Computación",
+      "pregunta": "¿En qué consiste un 'Algoritmo'?",
+      "opciones": [
+        "Una pieza de hardware que acelera gráficos.",
+        "Un lenguaje de programación obsoleto.",
+        "Un conjunto de instrucciones definidas, ordenadas y finitas para resolver un problema.",
+        "Un error de sintaxis en el código."
+      ],
+      "respuestaCorrectaIndex": 2,
+      "retroalimentacion": "Los algoritmos son la base del pensamiento computacional, independientemente del lenguaje que uses."
+    },
+    {
+      "id": 22,
+      "categoria": "Vida Universitaria",
+      "pregunta": "Si un estudiante no aprueba una materia en evaluación ordinaria dentro de la UTM, ¿cuál es el siguiente paso académico?",
+      "opciones": [
+        "Cursa la materia en verano.",
+        "Presenta un examen extraordinario.",
+        "Es dado de baja inmediatamente.",
+        "Pasa con calificación de 6 de forma automática."
+      ],
+      "respuestaCorrectaIndex": 1,
+      "retroalimentacion": "El examen extraordinario es la oportunidad de acreditar la materia si no se alcanzó el promedio necesario."
+    },
+    {
+      "id": 23,
+      "categoria": "Tronco Común (Ingeniería)",
+      "pregunta": "¿A qué paradigma de programación pertenecen lenguajes como Java y C#?",
+      "opciones": [
+        "Programación Funcional",
+        "Programación Orientada a Objetos (POO)",
+        "Programación Lógica",
+        "Programación Reactiva"
+      ],
+      "respuestaCorrectaIndex": 1,
+      "retroalimentacion": "La POO se basa en el concepto de 'clases' y 'objetos' que interactúan entre sí."
+    },
+    {
+      "id": 24,
+      "categoria": "Bases de Datos",
+      "pregunta": "¿Cuál es la característica principal de una Base de Datos Relacional?",
+      "opciones": [
+        "No utiliza ningún tipo de estructura fija.",
+        "Organiza los datos en tablas vinculadas entre sí.",
+        "Solo almacena archivos multimedia.",
+        "Se ejecuta exclusivamente en la nube."
+      ],
+      "respuestaCorrectaIndex": 1,
+      "retroalimentacion": "Las tablas estructuradas en filas y columnas son la esencia de sistemas como MySQL o PostgreSQL."
+    },
+    {
+      "id": 25,
+      "categoria": "Vida Universitaria",
+      "pregunta": "¿Qué documento necesitas forzosamente presentar en la entrada para poder ingresar al campus de la UTM?",
+      "opciones": [
+        "Tu comprobante de domicilio.",
+        "Tu kárdex impreso.",
+        "Tu credencial de estudiante vigente.",
+        "No se necesita nada."
+      ],
+      "respuestaCorrectaIndex": 2,
+      "retroalimentacion": "Portar tu credencial es obligatorio por seguridad y control de acceso a las instalaciones."
+    },
+    {
+      "id": 26,
+      "categoria": "Redes de Computadoras",
+      "pregunta": "¿Qué significa el acrónimo IP en el contexto de internet y redes?",
+      "opciones": [
+        "Internal Port",
+        "Internet Protocol",
+        "Interconnected PCs",
+        "Intranet Provider"
+      ],
+      "respuestaCorrectaIndex": 1,
+      "retroalimentacion": "El Protocolo de Internet (IP) es el conjunto de reglas que rigen el formato de los datos enviados a través de internet o la red local."
+    },
+    {
+      "id": 27,
+      "categoria": "Matemáticas Básicas",
+      "pregunta": "¿Cuál es el valor del seno de 90 grados (π/2 radianes)?",
+      "opciones": ["0", "-1", "1", "Infinito"],
+      "respuestaCorrectaIndex": 2,
+      "retroalimentacion": "En el círculo unitario, el ángulo de 90 grados alcanza el punto máximo en el eje Y, que equivale a 1."
+    },
+    {
+      "id": 28,
+      "categoria": "Herramientas de Desarrollo",
+      "pregunta": "En el control de versiones con Git, ¿cuál es el propósito principal de crear una 'rama' (branch)?",
+      "opciones": [
+        "Borrar el historial de cambios.",
+        "Desarrollar nuevas características de forma aislada sin afectar el código principal.",
+        "Hacer una copia de seguridad en la nube.",
+        "Compilar el código más rápido."
+      ],
+      "respuestaCorrectaIndex": 1,
+      "retroalimentacion": "Las ramas te permiten experimentar y escribir código nuevo sin el miedo de romper la versión estable ('main') de tu proyecto."
+    },
+    {
+      "id": 29,
+      "categoria": "Vida Universitaria",
+      "pregunta": "¿Cuál es la calificación mínima aprobatoria en la escala de evaluación de la UTM?",
+      "opciones": ["7.0", "6.0", "8.0", "5.0"],
+      "respuestaCorrectaIndex": 1,
+      "retroalimentacion": "La escala es de 0 a 10. Una calificación de 6.0 es suficiente para aprobar la materia, ¡aunque siempre hay que apuntar más alto!"
+    },
+    {
+      "id": 30,
+      "categoria": "Desarrollo de Software",
+      "pregunta": "¿Qué significan las siglas API?",
+      "opciones": [
+        "Advanced Programming Interface",
+        "Automated Process Integration",
+        "Application Programming Interface",
+        "Algorithm Processing Index"
+      ],
+      "respuestaCorrectaIndex": 2,
+      "retroalimentacion": "Una API permite que dos aplicaciones de software se comuniquen entre sí, como cuando tu app móvil se conecta a un servidor."
+    }
+  ]
+}

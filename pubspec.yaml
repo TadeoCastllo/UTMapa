@@ -73,7 +73,24 @@ flutter:
     - assets/images/aulas_1.jpg
     - assets/images/aulas_2.jpg
     - assets/images/aulas_3.jpg
+    - assets/images/servicios_escolares_1.jpg
+    - assets/images/servicios_escolares_2.jpg
+    - assets/images/servicios_escolares_3.jpg
+    # - assets/images/paraninfo_1.jpg
+    # - assets/images/paraninfo_2.jpg
+    # - assets/images/paraninfo_3.jpg
+    # - assets/images/auditorio_1.jpg
+    # - assets/images/auditorio_2.jpg
+    # - assets/images/auditorio_3.jpg
+    # - assets/images/usalab_1.jpg
+    # - assets/images/usalab_2.jpg
+    # - assets/images/fuente_1.jpg
+    # - assets/images/fuente_2.jpg
+    # - assets/images/gimnasio_1.jpg
+    # - assets/images/gimnasio_2.jpg
+    # - assets/images/gimnasio_3.jpg
     - assets/data/pois.json
+    - assets/data/trivia.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

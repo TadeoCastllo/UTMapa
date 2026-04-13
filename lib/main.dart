@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:utmapa/screens/games/trivia_screen.dart';
 import 'screens/home/home_page.dart';
 import 'core/constants.dart';
 import 'modules/sopa_letras/sopa_screen.dart';
@@ -27,6 +28,7 @@ class UTMapaApp extends StatelessWidget {
         '/sopa_letras': (context) => const SopaLetrasScreen(),
         '/futbol': (context) => const FutbolScreen(),
         '/atrapa_objetos': (context) => const AtrapaObjetosScreen(),
+        '/trivia_utm': (context) => const TriviaScreen(),
       },
     );
   }
