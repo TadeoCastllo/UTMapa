@@ -12,7 +12,7 @@ El objetivo principal es ofrecer una herramienta útil y entretenida que integra
 ## 🛠️ Tecnologías a Utilizar (Propuestas, sujetas a cambio)
 El proyecto se desarrollará utilizando **Flutter** como tecnología principal. Para cubrir los requerimientos funcionales, se propone el uso de las siguientes bibliotecas (paquetes):
 
-* **`flutter_map`** o **`Maps_flutter`**: Para la implementación del mapa interactivo de la UTM con estilos personalizados (colores institucionales guinda y beige, vista plana 2D).
+* **`flutter_map`**: Para la implementación del mapa interactivo de la UTM con estilos personalizados (colores institucionales guinda y beige, vista plana 2D).
 * **`geolocator`**: Para la navegación GPS y ubicación en tiempo real del estudiante dentro del campus.
 * **`sensors_plus`**: Para capturar los datos del acelerómetro y giroscopio del dispositivo (necesario para el control de movimiento en el minijuego de fútbol).
 * **`carousel_slider`**: Para la implementación fluida de las galerías de imágenes en cada punto de interés.
@@ -27,7 +27,7 @@ A continuación, se presenta la propuesta visual de la interfaz, diseñada con l
 
 ### Descripción de Pantallas Principales:
 * **Pantalla de Inicio (Home):** Panel principal de bienvenida con el logotipo de la universidad y accesos rápidos mediante tarjetas (Mapa, Minijuegos, Directorio).
-* **Mapa Interactivo:** Vista 2D minimalista del campus. Muestra la ubicación en tiempo real del usuario (punto azul GPS) y marcadores (pines) guindas para al menos 10 puntos de interés.
+* **Mapa Interactivo:** Vista 2D minimalista del campus. Muestra la ubicación en tiempo real del usuario (punto guinda GPS) y marcadores (pines) guindas para al menos 10 puntos de interés.
 * **Detalle del Lugar (POI):** Al seleccionar un punto en el mapa (ej. Biblioteca o Canchas), se despliega una vista con una galería de imágenes, descripción del lugar, horarios y un botón de acción principal para iniciar el minijuego asociado a ese espacio.
 
 ## 🎮 Propuestas de Juegos Interactivos
