@@ -332,3 +332,20 @@ class _TriviaScreenState extends State<TriviaScreen> {
     );
   }
 }
+
+/*
+ * ============================================================================
+ * DOCUMENTACIÓN DE ORIGEN DE DATOS (TRIVIA UTM)
+ * ============================================================================
+ * USO DE INTELIGENCIA ARTIFICIAL:
+ * Para la generación inicial y estructuración de este banco masivo de 
+ * preguntas, se utilizaron herramientas de Inteligencia Artificial (LLMs) 
+ * con el objetivo de agilizar el desarrollo de la base de datos.
+ * Las preguntas generadas se encuentran en el archivo assets/data/trivia.json
+ * * CURACIÓN MANUAL:
+ * Todo el contenido generado por IA fue estrictamente revisado, curado y 
+ * adaptado manualmente por el equipo de desarrollo. Esto garantiza que la 
+ * información, respuestas y el contexto general sean 100% fieles a la 
+ * realidad, historia y servicios de la Universidad Tecnológica de la Mixteca.
+ * ============================================================================
+ */
