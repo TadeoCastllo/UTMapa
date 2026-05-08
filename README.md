@@ -37,3 +37,35 @@ Como parte de los elementos lúdicos, cada integrante del equipo desarrollará u
 * `/propuesta/trivia-tadeo/`
 * `/propuesta/futbol-zaeinmd/`
 * `/propuesta/deslizable-tadeo/`
+
+## 🚀 Guía de Instalación y Configuración
+
+Sigue estos pasos para clonar, configurar y ejecutar el proyecto en tu entorno local:
+
+### 1. Clonar el repositorio
+```bash
+git clone https://github.com/TadeoCastllo/UTMapa.git
+cd UTMapa
+```
+
+### 2. Instalar dependencias
+Asegúrate de tener [Flutter](https://docs.flutter.dev/get-started/install) instalado en tu sistema y ejecuta el siguiente comando en la raíz del proyecto para descargar los paquetes necesarios:
+```bash
+flutter pub get
+```
+
+### 3. Configuración de Firebase (Notificaciones Push)
+Este proyecto utiliza Firebase Cloud Messaging. Por cuestiones de seguridad, los archivos de credenciales están excluidos del repositorio público (`.gitignore`).
+Para compilar correctamente el proyecto necesitarás estos archivos:
+- Consigue el archivo **`google-services.json`** de la consola de Firebase y colócalo en la ruta: `android/app/google-services.json`.
+- Asegúrate de contar con el archivo **`firebase_options.dart`** en la ruta `lib/firebase_options.dart` generado vía FlutterFire CLI.
+
+### 4. Compilar y Ejecutar
+Con tu dispositivo conectado o el emulador corriendo, puedes lanzar la aplicación en modo de depuración:
+```bash
+flutter run
+```
+Si deseas construir el APK optimizado para producción (que incluye los íconos de la app y las notificaciones activas en segundo plano):
+```bash
+flutter build apk --release
+```
