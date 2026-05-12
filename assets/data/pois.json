@@ -1,7 +1,7 @@
 [
   {
     "id": "biblioteca",
-    "name": "Biblioteca Central",
+    "name": "Biblioteca",
     "description": "El corazón intelectual de la UTM. Un espacio dedicado al estudio, la investigación y el acceso a una vasta colección de recursos bibliográficos y digitales en un ambiente tranquilo.",
     "imageUrls": [
       "assets/images/biblioteca_1.jpg",
