@@ -2,19 +2,81 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:utmapa/core/constants.dart';
 import 'package:utmapa/models/poi_model.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 
-class DetailsScreen extends StatelessWidget {
+class DetailsScreen extends StatefulWidget {
   final POIModel poi;
 
-  const DetailsScreen({
-    super.key,
-    required this.poi,
-  });
+  const DetailsScreen({super.key, required this.poi});
+
+  @override
+  State<DetailsScreen> createState() => _DetailsScreenState();
+}
+
+class _DetailsScreenState extends State<DetailsScreen> {
+  final FlutterTts flutterTts = FlutterTts();
+  bool isPlaying = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _initTts();
+  }
+
+  Future<void> _initTts() async {
+    await flutterTts.setLanguage("es-MX");
+    await flutterTts.setSpeechRate(0.5);
+    await flutterTts.setVolume(1.0);
+    await flutterTts.setPitch(1.0);
+
+    flutterTts.setCompletionHandler(() {
+      if (mounted) {
+        setState(() {
+          isPlaying = false;
+        });
+      }
+    });
+  }
+
+  Future<void> _toggleTts() async {
+    if (isPlaying) {
+      await flutterTts.stop();
+      if (mounted) {
+        setState(() {
+          isPlaying = false;
+        });
+      }
+    } else {
+      if (mounted) {
+        setState(() {
+          isPlaying = true;
+        });
+      }
+      String textToRead =
+          "${widget.poi.name}. ${widget.poi.description}. Horario: ${widget.poi.schedule}";
+      await flutterTts.speak(textToRead);
+    }
+  }
+
+  @override
+  void dispose() {
+    flutterTts.stop();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
+    final poi = widget.poi;
     return Scaffold(
       backgroundColor: const Color(UTMConstants.colorBeige),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _toggleTts,
+        backgroundColor: const Color(UTMConstants.colorGuinda),
+        child: Icon(
+          isPlaying ? Icons.stop : Icons.volume_up,
+          color: Colors.white,
+        ),
+      ),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -71,7 +133,9 @@ class DetailsScreen extends StatelessWidget {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(25),
                             border: Border.all(
-                              color: const Color(UTMConstants.colorGuinda).withValues(alpha: 0.2),
+                              color: const Color(
+                                UTMConstants.colorGuinda,
+                              ).withValues(alpha: 0.2),
                             ),
                           ),
                           child: ClipRRect(
@@ -82,7 +146,9 @@ class DetailsScreen extends StatelessWidget {
                               width: double.infinity,
                               errorBuilder: (context, error, stackTrace) {
                                 return Container(
-                                  color: const Color(UTMConstants.colorGuinda).withValues(alpha: 0.1),
+                                  color: const Color(
+                                    UTMConstants.colorGuinda,
+                                  ).withValues(alpha: 0.1),
                                   child: const Center(
                                     child: Icon(
                                       Icons.image_not_supported,
