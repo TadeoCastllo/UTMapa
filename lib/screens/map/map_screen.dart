@@ -7,6 +7,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:utmapa/screens/poi_detail/details_screen.dart';
 import 'package:utmapa/models/poi_model.dart';
 import '../../core/constants.dart';
+import 'package:utmapa/screens/qr/qr_scanner_screen.dart';
 
 class MapScreen extends StatefulWidget {
   const MapScreen({super.key});
@@ -112,6 +113,36 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
     controller.forward();
   }
 
+  Future<void> _openQrScanner() async {
+    final result = await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const QrScannerScreen()),
+    );
+
+    if (result != null && result is String) {
+      try {
+        final poi = _pois.firstWhere((p) => p.id == result);
+        if (mounted) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) => DetailsScreen(poi: poi),
+            ),
+          );
+        }
+      } catch (e) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Código QR no válido para la UTM'),
+              backgroundColor: Colors.red,
+            ),
+          );
+        }
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -178,16 +209,29 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
                 ),
               ],
             ),
-      floatingActionButton: _currentPosition != null
-          ? FloatingActionButton(
+      floatingActionButton: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton(
+            heroTag: "btnQr",
+            backgroundColor: const Color(UTMConstants.colorBeige),
+            foregroundColor: const Color(UTMConstants.colorGuinda),
+            onPressed: _openQrScanner,
+            child: const Icon(Icons.qr_code_scanner, size: 30),
+          ),
+          const SizedBox(height: 15),
+          if (_currentPosition != null)
+            FloatingActionButton(
+              heroTag: "btnGps",
               backgroundColor: const Color(UTMConstants.colorGuinda),
               foregroundColor: Colors.white,
               onPressed: () {
                 _animatedMapMove(_currentPosition!, 16.5);
               },
               child: const Icon(Icons.my_location),
-            )
-          : null,
+            ),
+        ],
+      ),
     );
   }
 }
