@@ -106,6 +106,7 @@ flutter:
     - assets/images/purificadora_1.jpg
     - assets/images/purificadora_2.jpg
     - assets/images/purificadora_3.jpg
+    - assets/images/Calendario.jpg
 
     - assets/data/pois.json
     - assets/data/trivia.json
