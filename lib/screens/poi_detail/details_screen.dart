@@ -6,7 +6,6 @@ import 'package:flutter_tts/flutter_tts.dart';
 
 class DetailsScreen extends StatefulWidget {
   final POIModel poi;
-
   const DetailsScreen({super.key, required this.poi});
 
   @override
@@ -23,38 +22,176 @@ class _DetailsScreenState extends State<DetailsScreen> {
     _initTts();
   }
 
+  // se modifico -> Función de Calendario con InteractiveViewer para permitir ZOOM táctil en detalles
+  void _mostrarCalendario(BuildContext context) {
+    final bool isDark = Theme.of(context).brightness == Brightness.dark;
+    showDialog(
+      context: context,
+      builder: (context) => Dialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        backgroundColor: isDark ? Colors.grey[900] : Colors.white,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Text(
+                "Calendario Escolar",
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: isDark
+                      ? Colors.white
+                      : const Color(UTMConstants.colorGuinda),
+                ),
+              ),
+            ),
+            Flexible(
+              child: ClipRRect(
+                borderRadius: const BorderRadius.only(
+                  bottomLeft: Radius.circular(20),
+                  bottomRight: Radius.circular(20),
+                ),
+                // se agrego -> InteractiveViewer permite hacer zoom con los dedos en la imagen
+                child: InteractiveViewer(
+                  panEnabled: true,
+                  minScale: 0.5,
+                  maxScale: 4.0,
+                  child: Image.asset(
+                    'assets/images/Calendario.jpg',
+                    fit: BoxFit.contain,
+                    errorBuilder: (context, error, stackTrace) => Container(
+                      padding: const EdgeInsets.all(22),
+                      child: const Text("Error al cargar Calendario.jpg"),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            // se agrego -> Botón de cierre para facilitar la salida tras usar el zoom
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text(
+                "CERRAR",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  // se agrego -> Lista de eventos adaptativa para detalles
+  void _mostrarEventos(BuildContext context) {
+    final bool isDark = Theme.of(context).brightness == Brightness.dark;
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: isDark
+          ? Colors.grey[900]
+          : const Color(UTMConstants.colorBeige),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(25)),
+      ),
+      builder: (context) => Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              "ACTIVIDADES PLANEADAS",
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: isDark
+                    ? Colors.white
+                    : const Color(UTMConstants.colorGuinda),
+              ),
+            ),
+            const Divider(),
+            Flexible(
+              child: ListView(
+                shrinkWrap: true,
+                children: [
+                  _buildEventTile(
+                    context,
+                    Icons.mic,
+                    "Ciclo de Conferencias",
+                    "18 May - 10:00 AM",
+                    "Auditorio Rectoría",
+                  ),
+                  _buildEventTile(
+                    context,
+                    Icons.smart_toy,
+                    "Competencias Robots",
+                    "20 May - 02:00 PM",
+                    "Plaza Estudiante",
+                  ),
+                  _buildEventTile(
+                    context,
+                    Icons.health_and_safety,
+                    "Jornadas de Salud",
+                    "22 May - 09:00 AM",
+                    "Centro Salud",
+                  ),
+                  _buildEventTile(
+                    context,
+                    Icons.military_tech,
+                    "Torneo de Ajedrez",
+                    "25 May - 04:00 PM",
+                    "Biblioteca",
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildEventTile(
+    BuildContext context,
+    IconData icon,
+    String title,
+    String time,
+    String place,
+  ) {
+    final bool isDark = Theme.of(context).brightness == Brightness.dark;
+    return ListTile(
+      leading: Icon(icon, color: const Color(UTMConstants.colorGuinda)),
+      title: Text(
+        title,
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+          color: isDark ? Colors.white : Colors.black87,
+        ),
+      ),
+      subtitle: Text(
+        "$time \n$place",
+        style: TextStyle(color: isDark ? Colors.white70 : Colors.black54),
+      ),
+      isThreeLine: true,
+    );
+  }
+
   Future<void> _initTts() async {
     await flutterTts.setLanguage("es-MX");
     await flutterTts.setSpeechRate(0.5);
-    await flutterTts.setVolume(1.0);
-    await flutterTts.setPitch(1.0);
-
     flutterTts.setCompletionHandler(() {
-      if (mounted) {
-        setState(() {
-          isPlaying = false;
-        });
-      }
+      if (mounted) setState(() => isPlaying = false);
     });
   }
 
   Future<void> _toggleTts() async {
     if (isPlaying) {
       await flutterTts.stop();
-      if (mounted) {
-        setState(() {
-          isPlaying = false;
-        });
-      }
+      if (mounted) setState(() => isPlaying = false);
     } else {
-      if (mounted) {
-        setState(() {
-          isPlaying = true;
-        });
-      }
-      String textToRead =
-          "${widget.poi.name}. ${widget.poi.description}. Horario: ${widget.poi.schedule}";
-      await flutterTts.speak(textToRead);
+      if (mounted) setState(() => isPlaying = true);
+      await flutterTts.speak(
+        "${widget.poi.name}. ${widget.poi.description}. Horario: ${widget.poi.schedule}",
+      );
     }
   }
 
@@ -67,15 +204,39 @@ class _DetailsScreenState extends State<DetailsScreen> {
   @override
   Widget build(BuildContext context) {
     final poi = widget.poi;
+    final bool isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Scaffold(
-      backgroundColor: const Color(UTMConstants.colorBeige),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _toggleTts,
-        backgroundColor: const Color(UTMConstants.colorGuinda),
-        child: Icon(
-          isPlaying ? Icons.stop : Icons.volume_up,
-          color: Colors.white,
-        ),
+      backgroundColor: isDark ? null : const Color(UTMConstants.colorBeige),
+      floatingActionButton: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton(
+            heroTag: "btn_c_d",
+            mini: true,
+            onPressed: () => _mostrarCalendario(context),
+            backgroundColor: const Color(UTMConstants.colorGuinda),
+            child: const Icon(Icons.calendar_month, color: Colors.white),
+          ),
+          const SizedBox(height: 10),
+          FloatingActionButton(
+            heroTag: "btn_e_d",
+            mini: true,
+            onPressed: () => _mostrarEventos(context),
+            backgroundColor: const Color(UTMConstants.colorGuinda),
+            child: const Icon(Icons.event_note, color: Colors.white),
+          ),
+          const SizedBox(height: 10),
+          FloatingActionButton(
+            heroTag: "btn_t_d",
+            onPressed: _toggleTts,
+            backgroundColor: const Color(UTMConstants.colorGuinda),
+            child: Icon(
+              isPlaying ? Icons.stop : Icons.volume_up,
+              color: Colors.white,
+            ),
+          ),
+        ],
       ),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -113,11 +274,12 @@ class _DetailsScreenState extends State<DetailsScreen> {
               ),
               Text(
                 "📍 Campus UTM",
-                style: TextStyle(color: Colors.grey[700], fontSize: 16),
+                style: TextStyle(
+                  color: isDark ? Colors.white70 : Colors.grey[700],
+                  fontSize: 16,
+                ),
               ),
               const SizedBox(height: 25),
-
-              // Contenedor de Galería de Imágenes (con validaciones de null y bordes)
               if (poi.imageUrls.isNotEmpty)
                 CarouselSlider(
                   options: CarouselOptions(
@@ -126,71 +288,30 @@ class _DetailsScreenState extends State<DetailsScreen> {
                     enableInfiniteScroll: poi.imageUrls.length > 1,
                     viewportFraction: 0.9,
                   ),
-                  items: poi.imageUrls.map((imageUrl) {
-                    return Builder(
-                      builder: (BuildContext context) {
-                        return Container(
+                  items: poi.imageUrls
+                      .map(
+                        (url) => Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(25),
                             border: Border.all(
                               color: const Color(
                                 UTMConstants.colorGuinda,
-                              ).withValues(alpha: 0.2),
+                              ).withOpacity(0.2),
                             ),
                           ),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(25),
                             child: Image.asset(
-                              imageUrl,
+                              url,
                               fit: BoxFit.cover,
                               width: double.infinity,
-                              errorBuilder: (context, error, stackTrace) {
-                                return Container(
-                                  color: const Color(
-                                    UTMConstants.colorGuinda,
-                                  ).withValues(alpha: 0.1),
-                                  child: const Center(
-                                    child: Icon(
-                                      Icons.image_not_supported,
-                                      size: 50,
-                                      color: Color(UTMConstants.colorGuinda),
-                                    ),
-                                  ),
-                                );
-                              },
                             ),
                           ),
-                        );
-                      },
-                    );
-                  }).toList(),
-                )
-              else
-                // Fallback si no hay imágenes
-                Container(
-                  height: 220,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: const Color(
-                      UTMConstants.colorGuinda,
-                    ).withValues(alpha: 0.1),
-                    borderRadius: BorderRadius.circular(25),
-                    border: Border.all(
-                      color: const Color(
-                        UTMConstants.colorGuinda,
-                      ).withValues(alpha: 0.2),
-                    ),
-                  ),
-                  child: const Icon(
-                    Icons.location_on,
-                    size: 100,
-                    color: Color(UTMConstants.colorGuinda),
-                  ),
+                        ),
+                      )
+                      .toList(),
                 ),
-
               const SizedBox(height: 25),
-
-              // Fichas de Información
               Row(
                 children: [
                   _infoCard(Icons.access_time_filled, "HORARIO", poi.schedule),
@@ -198,7 +319,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   _infoCard(Icons.map, "UBICACIÓN", "UTM"),
                 ],
               ),
-
               const SizedBox(height: 30),
               const Text(
                 "Sobre este espacio",
@@ -211,16 +331,13 @@ class _DetailsScreenState extends State<DetailsScreen> {
               const SizedBox(height: 12),
               Text(
                 poi.description,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 16,
-                  color: Colors.black87,
+                  color: isDark ? Colors.white : Colors.black87,
                   height: 1.5,
                 ),
               ),
-
               const SizedBox(height: 40),
-
-              // Botón de Lanzamiento de Juego Estilo Card
               Container(
                 width: double.infinity,
                 padding: const EdgeInsets.all(25),
@@ -234,15 +351,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
                     end: Alignment.bottomRight,
                   ),
                   borderRadius: BorderRadius.circular(30),
-                  boxShadow: [
-                    BoxShadow(
-                      color: const Color(
-                        UTMConstants.colorGuinda,
-                      ).withValues(alpha: 0.3),
-                      blurRadius: 15,
-                      offset: const Offset(0, 8),
-                    ),
-                  ],
                 ),
                 child: Column(
                   children: [
@@ -251,7 +359,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
                       color: Colors.white,
                       size: 45,
                     ),
-                    const SizedBox(height: 12),
                     const Text(
                       "Reto Disponible",
                       style: TextStyle(
@@ -259,11 +366,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
-                    ),
-                    const SizedBox(height: 5),
-                    const Text(
-                      "Completa el desafío para ganar puntos",
-                      style: TextStyle(color: Colors.white70, fontSize: 14),
                     ),
                     const SizedBox(height: 25),
                     ElevatedButton(
@@ -274,20 +376,16 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(18),
                         ),
-                        elevation: 0,
                       ),
                       onPressed: () {
-                        // Navega a la ruta registrada en POIModel
-                        if (poi.gameRoute.isNotEmpty) {
+                        if (poi.gameRoute.isNotEmpty)
                           Navigator.pushNamed(context, poi.gameRoute);
-                        }
                       },
                       child: const Text(
                         "INICIAR JUEGO",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 16,
-                          letterSpacing: 1.1,
                         ),
                       ),
                     ),
@@ -303,19 +401,13 @@ class _DetailsScreenState extends State<DetailsScreen> {
   }
 
   Widget _infoCard(IconData icon, String title, String sub) {
+    final bool isDark = Theme.of(context).brightness == Brightness.dark;
     return Expanded(
       child: Container(
         padding: const EdgeInsets.all(18),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: isDark ? Colors.grey[850] : Colors.white,
           borderRadius: BorderRadius.circular(20),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withValues(alpha: 0.05),
-              blurRadius: 10,
-              offset: const Offset(0, 4),
-            ),
-          ],
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -327,10 +419,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
               style: TextStyle(
                 fontSize: 11,
                 fontWeight: FontWeight.bold,
-                color: Colors.grey[600],
+                color: isDark ? Colors.white60 : Colors.grey[600],
               ),
             ),
-            const SizedBox(height: 2),
             Text(
               sub,
               style: const TextStyle(

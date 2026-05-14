@@ -28,6 +28,171 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
     _loadInitData();
   }
 
+  // se modifico -> Función de Calendario con InteractiveViewer para permitir ZOOM táctil
+  void _mostrarCalendario() {
+    final bool isDark = Theme.of(context).brightness == Brightness.dark;
+    showDialog(
+      context: context,
+      builder: (context) => Dialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        backgroundColor: isDark ? Colors.grey[900] : Colors.white,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Text(
+                "Calendario Escolar",
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: isDark
+                      ? Colors.white
+                      : const Color(UTMConstants.colorGuinda),
+                ),
+              ),
+            ),
+            Flexible(
+              child: ClipRRect(
+                borderRadius: const BorderRadius.only(
+                  bottomLeft: Radius.circular(20),
+                  bottomRight: Radius.circular(20),
+                ),
+                // se agrego -> InteractiveViewer permite hacer zoom con los dedos
+                child: InteractiveViewer(
+                  panEnabled: true, // Permite mover la imagen
+                  minScale: 0.5,
+                  maxScale: 4.0, // Nivel máximo de zoom
+                  child: Image.asset(
+                    'assets/images/Calendario.jpg',
+                    fit: BoxFit.contain,
+                    // se agrego -> Manejo de error para cuando la imagen no carga
+                    errorBuilder: (context, error, stackTrace) => Container(
+                      padding: const EdgeInsets.all(20),
+                      child: Text(
+                        "Error: No se encontró 'Calendario.jpg' en assets/images/",
+                        style: TextStyle(
+                          color: isDark ? Colors.white70 : Colors.black54,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            // se agrego -> Botón de cierre para facilitar la salida después de hacer zoom
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text("CERRAR",
+                  style: TextStyle(fontWeight: FontWeight.bold)),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  // se agrego -> Función actualizada para mostrar eventos con scroll, fecha/hora y modo oscuro
+  void _mostrarEventos() {
+    final bool isDark = Theme.of(context).brightness == Brightness.dark;
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: isDark
+          ? Colors.grey[900]
+          : const Color(UTMConstants.colorBeige),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(25)),
+      ),
+      builder: (context) => Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              "ACTIVIDADES PLANEADAS",
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: isDark
+                    ? Colors.white
+                    : const Color(UTMConstants.colorGuinda),
+              ),
+            ),
+            const Divider(),
+            // se agrego -> Flexible y ListView para permitir el desplazamiento (subir y bajar)
+            Flexible(
+              child: ListView(
+                shrinkWrap: true,
+                children: [
+                  _buildEventItem(
+                    context,
+                    Icons.mic_external_on,
+                    "Ciclo de Conferencias",
+                    "18 de Mayo - 10:00 AM",
+                    "Auditorio de Rectoría",
+                    Colors.blue,
+                  ),
+                  _buildEventItem(
+                    context,
+                    Icons.smart_toy,
+                    "Competencias de Robots",
+                    "20 de Mayo - 02:00 PM",
+                    "Plaza del Estudiante",
+                    Colors.green,
+                  ),
+                  _buildEventItem(
+                    context,
+                    Icons.health_and_safety,
+                    "Jornadas de Salud",
+                    "22 de Mayo - 09:00 AM",
+                    "Centro de Salud Universitario",
+                    Colors.red,
+                  ),
+                  _buildEventItem(
+                    context,
+                    Icons.school,
+                    "Ceremonia de Graduación",
+                    "30 de Mayo - 11:00 AM",
+                    "Auditorio Central",
+                    Colors.orange,
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 20),
+          ],
+        ),
+      ),
+    );
+  }
+
+  // se agrego -> Widget auxiliar para construir cada evento con fecha y hora
+  Widget _buildEventItem(
+    BuildContext context,
+    IconData icon,
+    String title,
+    String dateTime,
+    String location,
+    Color iconColor,
+  ) {
+    final bool isDark = Theme.of(context).brightness == Brightness.dark;
+    return ListTile(
+      leading: Icon(icon, color: iconColor),
+      title: Text(
+        title,
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+          color: isDark ? Colors.white : Colors.black87,
+        ),
+      ),
+      subtitle: Text(
+        "$dateTime\n$location",
+        style: TextStyle(color: isDark ? Colors.white70 : Colors.black54),
+      ),
+      isThreeLine: true,
+    );
+  }
+
   Future<void> _loadInitData() async {
     try {
       final String jsonString = await rootBundle.loadString(
@@ -43,7 +208,6 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
     _determinePosition();
   }
 
-  // Función para obtener la ubicación del usuario
   Future<void> _determinePosition() async {
     bool serviceEnabled;
     LocationPermission permission;
@@ -84,28 +248,38 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
     if (!mounted) return;
 
     final latTween = Tween<double>(
-        begin: _mapController.camera.center.latitude,
-        end: destLocation.latitude);
+      begin: _mapController.camera.center.latitude,
+      end: destLocation.latitude,
+    );
     final lngTween = Tween<double>(
-        begin: _mapController.camera.center.longitude,
-        end: destLocation.longitude);
+      begin: _mapController.camera.center.longitude,
+      end: destLocation.longitude,
+    );
     final zoomTween = Tween<double>(
-        begin: _mapController.camera.zoom, end: destZoom);
+      begin: _mapController.camera.zoom,
+      end: destZoom,
+    );
 
     var controller = AnimationController(
-        duration: const Duration(milliseconds: 1200), vsync: this);
+      duration: const Duration(milliseconds: 1200),
+      vsync: this,
+    );
 
-    Animation<double> animation =
-        CurvedAnimation(parent: controller, curve: Curves.fastOutSlowIn);
+    Animation<double> animation = CurvedAnimation(
+      parent: controller,
+      curve: Curves.fastOutSlowIn,
+    );
 
     controller.addListener(() {
       _mapController.move(
-          LatLng(latTween.evaluate(animation), lngTween.evaluate(animation)),
-          zoomTween.evaluate(animation));
+        LatLng(latTween.evaluate(animation), lngTween.evaluate(animation)),
+        zoomTween.evaluate(animation),
+      );
     });
 
     animation.addStatusListener((status) {
-      if (status == AnimationStatus.completed || status == AnimationStatus.dismissed) {
+      if (status == AnimationStatus.completed ||
+          status == AnimationStatus.dismissed) {
         controller.dispose();
       }
     });
@@ -125,9 +299,7 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
         if (mounted) {
           Navigator.push(
             context,
-            MaterialPageRoute(
-              builder: (_) => DetailsScreen(poi: poi),
-            ),
+            MaterialPageRoute(builder: (_) => DetailsScreen(poi: poi)),
           );
         }
       } catch (e) {
@@ -170,7 +342,6 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
                 ),
                 MarkerLayer(
                   markers: [
-                    // 1. Marcador del GPS del usuario (Punto Azul)
                     if (_currentPosition != null)
                       Marker(
                         point: _currentPosition!,
@@ -182,8 +353,6 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
                           size: 30,
                         ),
                       ),
-
-                    // 2. Marcadores dinámicos de los POIs
                     ..._pois.map((poi) {
                       return Marker(
                         point: LatLng(poi.latitude, poi.longitude),
@@ -198,7 +367,6 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
                           ),
                           child: const Icon(
                             Icons.location_on,
-                            // Por defecto usamos el guinda de la institución para todos
                             color: Color(UTMConstants.colorGuinda),
                             size: 45,
                           ),
@@ -212,6 +380,22 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
       floatingActionButton: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
+          FloatingActionButton(
+            heroTag: "btnCalendario",
+            backgroundColor: const Color(UTMConstants.colorGuinda),
+            foregroundColor: Colors.white,
+            onPressed: _mostrarCalendario,
+            child: const Icon(Icons.calendar_month, size: 30),
+          ),
+          const SizedBox(height: 15),
+          FloatingActionButton(
+            heroTag: "btnEventos",
+            backgroundColor: const Color(UTMConstants.colorGuinda),
+            foregroundColor: Colors.white,
+            onPressed: _mostrarEventos,
+            child: const Icon(Icons.event_note, size: 30),
+          ),
+          const SizedBox(height: 15),
           FloatingActionButton(
             heroTag: "btnQr",
             backgroundColor: const Color(UTMConstants.colorBeige),
