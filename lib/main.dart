@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'services/push_notifications_service.dart';
-
 import 'package:utmapa/screens/games/trivia_screen.dart';
 import 'screens/home/home_page.dart';
 import 'core/constants.dart';

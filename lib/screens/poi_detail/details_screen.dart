@@ -294,7 +294,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                             border: Border.all(
                               color: const Color(
                                 UTMConstants.colorGuinda,
-                              ).withOpacity(0.2),
+                              ).withValues(alpha: 0.2),
                             ),
                           ),
                           child: ClipRRect(
@@ -376,8 +376,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         ),
                       ),
                       onPressed: () {
-                        if (poi.gameRoute.isNotEmpty)
+                        if (poi.gameRoute.isNotEmpty) {
                           Navigator.pushNamed(context, poi.gameRoute);
+                        }
                       },
                       child: const Text(
                         "INICIAR JUEGO",
