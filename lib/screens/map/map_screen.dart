@@ -28,7 +28,6 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
     _loadInitData();
   }
 
-  // se modifico -> Función de Calendario con InteractiveViewer para permitir ZOOM táctil
   void _mostrarCalendario() {
     final bool isDark = Theme.of(context).brightness == Brightness.dark;
     showDialog(
@@ -58,15 +57,14 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
                   bottomLeft: Radius.circular(20),
                   bottomRight: Radius.circular(20),
                 ),
-                // se agrego -> InteractiveViewer permite hacer zoom con los dedos
+
                 child: InteractiveViewer(
-                  panEnabled: true, // Permite mover la imagen
+                  panEnabled: true,
                   minScale: 0.5,
-                  maxScale: 4.0, // Nivel máximo de zoom
+                  maxScale: 4.0,
                   child: Image.asset(
                     'assets/images/Calendario.jpg',
                     fit: BoxFit.contain,
-                    // se agrego -> Manejo de error para cuando la imagen no carga
                     errorBuilder: (context, error, stackTrace) => Container(
                       padding: const EdgeInsets.all(20),
                       child: Text(
@@ -80,11 +78,13 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
                 ),
               ),
             ),
-            // se agrego -> Botón de cierre para facilitar la salida después de hacer zoom
+
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: const Text("CERRAR",
-                  style: TextStyle(fontWeight: FontWeight.bold)),
+              child: const Text(
+                "CERRAR",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
             ),
           ],
         ),
@@ -92,7 +92,6 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
     );
   }
 
-  // se agrego -> Función actualizada para mostrar eventos con scroll, fecha/hora y modo oscuro
   void _mostrarEventos() {
     final bool isDark = Theme.of(context).brightness == Brightness.dark;
     showModalBottomSheet(
@@ -119,7 +118,6 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
               ),
             ),
             const Divider(),
-            // se agrego -> Flexible y ListView para permitir el desplazamiento (subir y bajar)
             Flexible(
               child: ListView(
                 shrinkWrap: true,
@@ -166,7 +164,6 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
     );
   }
 
-  // se agrego -> Widget auxiliar para construir cada evento con fecha y hora
   Widget _buildEventItem(
     BuildContext context,
     IconData icon,

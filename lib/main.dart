@@ -27,14 +27,13 @@ class UTMapaApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // se agrego -> Reconstruye la app al cambiar el tema
     return ValueListenableBuilder<ThemeMode>(
       valueListenable: themeNotifier,
       builder: (_, ThemeMode currentMode, _) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           themeMode: currentMode,
-          // Tema Claro
+
           theme: ThemeData(
             useMaterial3: true,
             brightness: Brightness.light,
@@ -43,7 +42,7 @@ class UTMapaApp extends StatelessWidget {
               brightness: Brightness.light,
             ),
           ),
-          // se agrego -> Configuración para Modo Oscuro
+
           darkTheme: ThemeData(
             useMaterial3: true,
             brightness: Brightness.dark,

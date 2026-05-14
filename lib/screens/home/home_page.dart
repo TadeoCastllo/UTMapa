@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../../core/constants.dart';
 import '../../core/score_manager.dart';
 import '../map/map_screen.dart';
-// AGREGADO -> Importamos el notifier del archivo main
 import '../../main.dart';
 
 class HomePage extends StatefulWidget {
@@ -40,16 +39,12 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // AGREGADO -> Detectar si el modo actual es oscuro para ajustar colores
     final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
-
     return Scaffold(
-      // AGREGADO -> El fondo cambia a oscuro automáticamente si se selecciona
       backgroundColor: isDarkMode ? null : const Color(UTMConstants.colorBeige),
-      // AGREGADO -> Stack para colocar el selector de tema por encima de todo
+
       body: Stack(
         children: [
-          // --- DISEÑO ORIGINAL (COLUMNA PRINCIPAL) ---
           SafeArea(
             child: Column(
               children: [
@@ -101,7 +96,6 @@ class _HomePageState extends State<HomePage> {
 
                 const SizedBox(height: 30),
 
-                // DASHBOARD DE RÉCORDS
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Row(
@@ -166,7 +160,6 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
 
-                // BOTONES INFERIORES
                 Padding(
                   padding: const EdgeInsets.only(
                     left: 30,
@@ -255,7 +248,6 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
 
-          // AGREGADO -> EL BOTÓN SELECTOR DE TEMA
           Positioned(
             top: 50,
             left: 15,
@@ -288,7 +280,6 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  // SE CORRIGIÓ -> Problema de RenderFlex Overflow y visibilidad en modo oscuro
   void _mostrarAcercaDe(BuildContext context) {
     final bool isDark = Theme.of(context).brightness == Brightness.dark;
 
@@ -301,7 +292,7 @@ class _HomePageState extends State<HomePage> {
           children: [
             const Icon(Icons.info, color: Color(UTMConstants.colorGuinda)),
             const SizedBox(width: 10),
-            // FIX: Flexible evita que el Row se desborde horizontalmente
+
             Flexible(
               child: Text(
                 "Acerca de UTMapa",

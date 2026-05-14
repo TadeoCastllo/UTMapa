@@ -22,7 +22,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
     _initTts();
   }
 
-  // se modifico -> Función de Calendario con InteractiveViewer para permitir ZOOM táctil en detalles
   void _mostrarCalendario(BuildContext context) {
     final bool isDark = Theme.of(context).brightness == Brightness.dark;
     showDialog(
@@ -52,7 +51,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   bottomLeft: Radius.circular(20),
                   bottomRight: Radius.circular(20),
                 ),
-                // se agrego -> InteractiveViewer permite hacer zoom con los dedos en la imagen
+
                 child: InteractiveViewer(
                   panEnabled: true,
                   minScale: 0.5,
@@ -68,7 +67,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 ),
               ),
             ),
-            // se agrego -> Botón de cierre para facilitar la salida tras usar el zoom
+
             TextButton(
               onPressed: () => Navigator.pop(context),
               child: const Text(
@@ -82,7 +81,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
     );
   }
 
-  // se agrego -> Lista de eventos adaptativa para detalles
   void _mostrarEventos(BuildContext context) {
     final bool isDark = Theme.of(context).brightness == Brightness.dark;
     showModalBottomSheet(
