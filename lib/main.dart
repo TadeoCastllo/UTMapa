@@ -10,7 +10,6 @@ import 'modules/sopa_letras/sopa_screen.dart';
 import 'screens/games/atrapa_objetos.dart';
 import 'modules/futbol/futbol_screen.dart';
 
-// se agrego -> Notificador para el cambio de tema global
 final ValueNotifier<ThemeMode> themeNotifier = ValueNotifier(ThemeMode.system);
 
 void main() async {
